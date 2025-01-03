@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{d578bc70-1eb0-4cfc-b289-04262b02e4cf}</ProjectGuid>
+    <RootNamespace>Solution4</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\RSolution4\Collision.cpp" />
+    <ClCompile Include="..\RSolution4\CoordinateSystem.cpp" />
+    <ClCompile Include="..\RSolution4\Entity.cpp" />
+    <ClCompile Include="..\RSolution4\Fish.cpp" />
+    <ClCompile Include="..\RSolution4\FishSchool.cpp" />
+    <ClCompile Include="..\RSolution4\FixedEntity.cpp" />
+    <ClCompile Include="..\RSolution4\Heightmap.cpp" />
+    <ClCompile Include="..\RSolution4\main.cpp" />
+    <ClCompile Include="..\RSolution4\Map.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\DisplayList.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\Material.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\MtlLibrary.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\MtlLibraryManager.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\ObjModel.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\ObjStringParsing.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\SpriteFont.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\Texture.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\TextureBmp.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\TextureManager.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\Vector2.cpp" />
+    <ClCompile Include="..\RSolution4\ObjLibrary\Vector3.cpp" />
+    <ClCompile Include="..\RSolution4\Player.cpp" />
+    <ClCompile Include="..\RSolution4\Sleep.cpp" />
+    <ClCompile Include="..\RSolution4\SurfaceNormal.cpp" />
+    <ClCompile Include="..\RSolution4\Terrain.cpp" />
+    <ClCompile Include="..\RSolution4\TimeManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\RSolution4\Collision.h" />
+    <ClInclude Include="..\RSolution4\CoordinateSystem.h" />
+    <ClInclude Include="..\RSolution4\Entity.h" />
+    <ClInclude Include="..\RSolution4\Fish.h" />
+    <ClInclude Include="..\RSolution4\FishSchool.h" />
+    <ClInclude Include="..\RSolution4\FixedEntity.h" />
+    <ClInclude Include="..\RSolution4\freeglut.h" />
+    <ClInclude Include="..\RSolution4\freeglut_ext.h" />
+    <ClInclude Include="..\RSolution4\freeglut_std.h" />
+    <ClInclude Include="..\RSolution4\GetGlut.h" />
+    <ClInclude Include="..\RSolution4\glut.h" />
+    <ClInclude Include="..\RSolution4\Heightmap.h" />
+    <ClInclude Include="..\RSolution4\Map.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\DisplayList.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\Material.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\MtlLibrary.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\MtlLibraryManager.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\ObjModel.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\ObjSettings.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\ObjStringParsing.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\SpriteFont.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\Texture.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\TextureBmp.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\TextureManager.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\Vector2.h" />
+    <ClInclude Include="..\RSolution4\ObjLibrary\Vector3.h" />
+    <ClInclude Include="..\RSolution4\Player.h" />
+    <ClInclude Include="..\RSolution4\Sleep.h" />
+    <ClInclude Include="..\RSolution4\SurfaceNormal.h" />
+    <ClInclude Include="..\RSolution4\Terrain.h" />
+    <ClInclude Include="..\RSolution4\TimeManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\RSolution4\freeglut.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\RSolution4\ObjLibrary\ObjLibrary-development-log.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

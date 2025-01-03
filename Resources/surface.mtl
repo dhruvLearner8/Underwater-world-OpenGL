@@ -1,0 +1,22 @@
+#
+#  surface.mtl
+#
+
+newmtl surface_top
+illum 2
+Ka 0.40 0.40 0.40
+Kd 0.60 0.60 0.60
+Ks 0.20 0.20 0.20
+Ns 50.00
+map_Ka water1.bmp
+map_Kd water1.bmp
+d 0.333333333333333
+
+newmtl surface_bottom
+illum 2
+Ka 0.40 0.40 0.40
+Kd 0.60 0.60 0.60
+Ks 0.00 0.00 0.00
+Ns 10.00
+map_Ka water1.bmp
+map_Kd water1.bmp

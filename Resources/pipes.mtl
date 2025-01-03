@@ -1,0 +1,11 @@
+#
+# pipes.mtl
+#
+
+newmtl rusty_pipe
+illum 2
+# basic colour information
+map_Kd rusty.bmp
+
+# End of pipes.mtl
+
