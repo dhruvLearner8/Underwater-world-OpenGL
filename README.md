@@ -1,6 +1,6 @@
 # Underwater World — OpenGL Underwater Exploration Game
 
-A real-time 3D underwater environment built from scratch in C++ and legacy (fixed-function) OpenGL — heightmap terrain, textured skybox and water surface, procedurally-scattered plants, boids-style fish flocking AI, a physics model (gravity/drag/bounce), an autopilot steering system, and a data-driven level format. Originally built as the solution for **CS 409, Assignment 4** (University of Waterloo).
+A real-time 3D underwater environment built from scratch in C++ and legacy (fixed-function) OpenGL — heightmap terrain, textured skybox and water surface, procedurally-scattered plants, boids-style fish flocking AI, a physics model (gravity/drag/bounce), an autopilot steering system, and a data-driven level format.
 
 ▶ **Demo video:** [Watch on Google Drive](https://drive.google.com/file/d/17pIJukirxjw5f_pVJ-3JlE6ikMQCHIRe/view?usp=sharing)
 
