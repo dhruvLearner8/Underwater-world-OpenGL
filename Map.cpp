@@ -14,7 +14,6 @@
 #include <unordered_map>
 
 #include "GetGlut.h"
-#include "WebGLCompat.h"
 
 #include "ObjLibrary/Vector2.h"
 #include "ObjLibrary/Vector3.h"
@@ -266,7 +265,7 @@ void Map :: drawFishSchoolSphere (unsigned int fish_school_index) const
 
 	glPushMatrix();
 		glTranslated(position.x, position.y, position.z);
-		drawWireSphere(radius, 12, 8);
+		glutWireSphere(radius, 12, 8);
 	glPopMatrix();
 }
 
@@ -672,14 +671,14 @@ void Map :: drawAxes () const
 {
 	glBegin(GL_LINES);
 		glColor3d(1.0, 0.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(2.0, 0.0, 0.0);
+		glVertex3d(0.0, 0.0, 0.0);
+		glVertex3d(2.0, 0.0, 0.0);
 		glColor3d(0.0, 1.0, 0.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(0.0, 2.0, 0.0);
+		glVertex3d(0.0, 0.0, 0.0);
+		glVertex3d(0.0, 2.0, 0.0);
 		glColor3d(0.0, 0.0, 1.0);
-		glVertex3f(0.0, 0.0, 0.0);
-		glVertex3f(0.0, 0.0, 2.0);
+		glVertex3d(0.0, 0.0, 0.0);
+		glVertex3d(0.0, 0.0, 2.0);
 	glEnd();
 }
 

@@ -8,7 +8,6 @@
 #include <vector>
 
 #include "GetGlut.h"
-#include "WebGLCompat.h"
 
 #include "ObjLibrary/Vector3.h"
 
@@ -111,14 +110,14 @@ void FishSchool :: drawAllCoordinateSystems (double length) const
 			mv_fish[i].applyDrawTransformations();
 			glBegin(GL_LINES);
 				glColor3d(1.0, 0.0, 0.0);
-				glVertex3f(0.0, 0.0, 0.0);
-				glVertex3f(length, 0.0, 0.0);
+				glVertex3d(0.0, 0.0, 0.0);
+				glVertex3d(length, 0.0, 0.0);
 				glColor3d(0.0, 1.0, 0.0);
-				glVertex3f(0.0, 0.0, 0.0);
-				glVertex3f(0.0, length, 0.0);
+				glVertex3d(0.0, 0.0, 0.0);
+				glVertex3d(0.0, length, 0.0);
 				glColor3d(0.0, 0.0, 1.0);
-				glVertex3f(0.0, 0.0, 0.0);
-				glVertex3f(0.0, 0.0, length);
+				glVertex3d(0.0, 0.0, 0.0);
+				glVertex3d(0.0, 0.0, length);
 			glEnd();
 		glPopMatrix();
 	}
@@ -134,8 +133,8 @@ void FishSchool :: drawAllCollisionSpheres () const
 		glPushMatrix();
 			mv_fish[i].applyDrawTransformations();
 			glScaled(radius, radius, radius);
-			drawWireSphere(1.0, 8, 6);
-			//drawWireSphere(1.0, 8, 6);
+			glutWireIcosahedron();
+			//glutWireSphere(1.0, 8, 6);
 		glPopMatrix();
 	}
 }
@@ -330,8 +329,8 @@ void FishSchool::drawLine()
 	glPushMatrix();
 	glBegin(GL_LINES);
 	
-	glVertex3f(leaderPosition.x,leaderPosition.y,leaderPosition.z);
-	glVertex3f(current_explore_target.x,current_explore_target.y,current_explore_target.z);
+	glVertex3d(leaderPosition.x,leaderPosition.y,leaderPosition.z);
+	glVertex3d(current_explore_target.x,current_explore_target.y,current_explore_target.z);
 	
 	glEnd();
 	glPopMatrix();
@@ -339,14 +338,14 @@ void FishSchool::drawLine()
 	glColor3d(1.0, 1.0, 0.0);
 	glPushMatrix();
 	glTranslated(leaderPosition.x, leaderPosition.y, leaderPosition.z);
-	drawWireSphere(0.1, 10, 10);
+	glutWireSphere(0.1, 10, 10);
 	glEnd();
 	glPopMatrix();
 
 	glColor3d(1.0, 0.0, 1.0);
 	glPushMatrix();
 	glTranslated(current_explore_target.x, current_explore_target.y, current_explore_target.z);
-	drawWireSphere(0.1, 10, 10);
+	glutWireSphere(0.1, 10, 10);
 	glEnd();
 	glPopMatrix();
 
@@ -435,8 +434,8 @@ void FishSchool::drawLinesToNeighbour() {
 			glPushMatrix();
 			glBegin(GL_LINES);
 
-			glVertex3f(fishPosition1.x, fishPosition1.y, fishPosition1.z);
-			glVertex3f(fishPosition2.x, fishPosition2.y, fishPosition2.z);
+			glVertex3d(fishPosition1.x, fishPosition1.y, fishPosition1.z);
+			glVertex3d(fishPosition2.x, fishPosition2.y, fishPosition2.z);
 
 			glEnd();
 			glPopMatrix();
@@ -448,8 +447,8 @@ void FishSchool::drawLinesToNeighbour() {
 		glPushMatrix();
 		glBegin(GL_LINES);
 
-		glVertex3f(fishPosition1.x, fishPosition1.y, fishPosition1.z);
-		glVertex3f(flock_leader.getPosition().x,flock_leader.getPosition().y,flock_leader.getPosition().z);
+		glVertex3d(fishPosition1.x, fishPosition1.y, fishPosition1.z);
+		glVertex3d(flock_leader.getPosition().x,flock_leader.getPosition().y,flock_leader.getPosition().z);
 
 		glEnd();
 		glPopMatrix(); 

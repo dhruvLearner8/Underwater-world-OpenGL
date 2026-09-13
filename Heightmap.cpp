@@ -201,11 +201,10 @@ void Heightmap :: initDisplayList (const std::string& texture_filename,
                                    float texture_repeat_v)
 {
 	TextureManager::activate(texture_filename);
-	display_list.record([=]()
-	{
+	display_list.begin();
 		glEnable(GL_TEXTURE_2D);
 		TextureManager::activate(texture_filename);
-		glColor3f(1.0f, 1.0f, 1.0f);
+		glColor3d(1.0, 1.0, 1.0);
 		for(unsigned int i0 = 0; i0 < size_cells_x; i0++)  // x
 		{
 			unsigned int i1 = i0 + 1;
@@ -215,13 +214,13 @@ void Heightmap :: initDisplayList (const std::string& texture_filename,
 				for(unsigned int k = 0; k <= size_cells_z; k++)  // z
 				{
 					float tex_k = texture_repeat_v * (float)(k) / size_cells_z + texture_offset_v;
-					glTexCoord2f(tex_i1, tex_k);
-					glVertex3f(i1, heights[i1][k], k);
-					glTexCoord2f(tex_i0, tex_k);
-					glVertex3f(i0, heights[i0][k], k);
+					glTexCoord2d(tex_i1, tex_k);
+					glVertex3d(i1, heights[i1][k], k);
+					glTexCoord2d(tex_i0, tex_k);
+					glVertex3d(i0, heights[i0][k], k);
 				}
 			glEnd();
 		}
 		glDisable(GL_TEXTURE_2D);
-	});
+	display_list.end();
 }

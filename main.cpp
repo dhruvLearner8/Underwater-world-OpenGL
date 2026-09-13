@@ -469,7 +469,7 @@ void drawHUD ()
 		autoPilotState << "auto pilot state " << map.getAutoPilotState();
 		font.draw(autoPilotState.str(), 16, window_height - 150);
 	}
-
+	
 
 	if(map.isCameraUnderwater())
 	{

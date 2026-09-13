@@ -192,18 +192,18 @@ namespace
 		case SpriteFont::STRIKETHROUGH:
 			glDisable(GL_TEXTURE_2D);
 			glBegin(GL_LINES);
-				glVertex3f(start_x - 1, y, depth);
-				glVertex3f(end_x   + 2, y, depth);
+				glVertex3d(start_x - 1, y, depth);
+				glVertex3d(end_x   + 2, y, depth);
 			glEnd();
 			break;
 		case SpriteFont::DOUBLE_UNDERLINE:
 		case SpriteFont::DOUBLE_STRIKETHROUGH:
 			glDisable(GL_TEXTURE_2D);
 			glBegin(GL_LINES);
-				glVertex3f(start_x - 1, y - 1, depth);
-				glVertex3f(end_x   + 2, y - 1, depth);
-				glVertex3f(start_x - 1, y + 1, depth);
-				glVertex3f(end_x   + 2, y + 1, depth);
+				glVertex3d(start_x - 1, y - 1, depth);
+				glVertex3d(end_x   + 2, y - 1, depth);
+				glVertex3d(start_x - 1, y + 1, depth);
+				glVertex3d(end_x   + 2, y + 1, depth);
 			glEnd();
 			break;
 		case SpriteFont::RED_UNDERLINE:
@@ -211,10 +211,10 @@ namespace
 			glDisable(GL_TEXTURE_2D);
 			glColor4ub(0xFF, 0x00, 0x00, 0xFF);
 			glBegin(GL_LINES);
-				glVertex3f(start_x - 1, y - 1, depth);
-				glVertex3f(end_x   + 2, y - 1, depth);
-				glVertex3f(start_x - 1, y, depth);
-				glVertex3f(end_x   + 2, y, depth);
+				glVertex3d(start_x - 1, y - 1, depth);
+				glVertex3d(end_x   + 2, y - 1, depth);
+				glVertex3d(start_x - 1, y, depth);
+				glVertex3d(end_x   + 2, y, depth);
 			glEnd();
 			break;
 		}
@@ -1444,20 +1444,20 @@ double SpriteFont :: drawLineOfText (const std::string& str,
 		
 			glBindTexture(GL_TEXTURE_2D, ma_character_name[character]);
 			glBegin(GL_QUADS);
-				glTexCoord2f(left_coord, 1.0); glVertex2f(left  - slant_amount, bottom);
-				glTexCoord2f(left_coord, 0.0); glVertex2f(left  + slant_amount, y);
-				glTexCoord2f(right_coord, 0.0); glVertex2f(right + slant_amount, y);
-				glTexCoord2f(right_coord, 1.0); glVertex2f(right - slant_amount, bottom);
+				glTexCoord3d(left_coord,  1.0, depth); glVertex2d(left  - slant_amount, bottom);
+				glTexCoord3d(left_coord,  0.0, depth); glVertex2d(left  + slant_amount, y);
+				glTexCoord3d(right_coord, 0.0, depth); glVertex2d(right + slant_amount, y);
+				glTexCoord3d(right_coord, 1.0, depth); glVertex2d(right - slant_amount, bottom);
 			glEnd();
 
 			// bold text is just normal text twice
 			if(is_bold)
 			{
 				glBegin(GL_QUADS);
-					glTexCoord2f(left_coord, 1.0); glVertex2f(left  - slant_amount + 1, bottom);
-					glTexCoord2f(left_coord, 0.0); glVertex2f(left  + slant_amount + 1, y);
-					glTexCoord2f(right_coord, 0.0); glVertex2f(right + slant_amount + 1, y);
-					glTexCoord2f(right_coord, 1.0); glVertex2f(right - slant_amount + 1, bottom);
+					glTexCoord3d(left_coord,  1.0, depth); glVertex2d(left  - slant_amount + 1, bottom);
+					glTexCoord3d(left_coord,  0.0, depth); glVertex2d(left  + slant_amount + 1, y);
+					glTexCoord3d(right_coord, 0.0, depth); glVertex2d(right + slant_amount + 1, y);
+					glTexCoord3d(right_coord, 1.0, depth); glVertex2d(right - slant_amount + 1, bottom);
 				glEnd();
 			}
 
@@ -1480,15 +1480,7 @@ void SpriteFont :: unsetUpForDrawing () const
 #ifdef OBJ_LIBRARY_SHADER_DISPLAY
 	g_vao.bindNone();  // prevent accidental changes
 #else
-	// Explicit restore instead of glPopAttrib() - see WebGLCompat.cpp.
-	// Reverses everything setUpForDrawing() changed, back to this
-	//   project's global defaults from main.cpp's initDisplay().
-	glDepthFunc(GL_LESS);
-	glEnable(GL_CULL_FACE);
-	glShadeModel(GL_SMOOTH);
-	glDisable(GL_BLEND);
-	glDisable(GL_ALPHA_TEST);
-	glDisable(GL_TEXTURE_2D);
+	glPopAttrib();
 #endif
 }
 
