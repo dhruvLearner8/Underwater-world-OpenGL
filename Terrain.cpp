@@ -190,7 +190,8 @@ void Terrain :: initAllPlantsList ()
 {
 	assert(isPlantLoaded());
 
-	m_all_plants_list.begin();
+	m_all_plants_list.record([=]()
+	{
 		for(unsigned int x = 0; x < m_underwater.getSizeCellsX(); x++)
 			for(unsigned int z = 0; z < m_underwater.getSizeCellsZ(); z++)
 				if(m_heights_texture.getGreen(x, z) >= 64)
@@ -202,12 +203,13 @@ void Terrain :: initAllPlantsList ()
 						plant_list.draw();
 					glPopMatrix();
 				}
-	m_all_plants_list.end();
+	});
 }
 
 void Terrain :: initSurfaceNormalsList ()
 {
-	m_surface_normals_list.begin();
+	m_surface_normals_list.record([=]()
+	{
 		glColor3ub(255, 255, 0);  // yellow
 		glBegin(GL_LINES);
 			for(float x = 0.25f; x < m_underwater.getSizeCellsX(); x += 0.5f)
@@ -223,16 +225,16 @@ void Terrain :: initSurfaceNormalsList ()
 					Vector3 pos(x, y, z);
 					pos = pos.getComponentProduct(m_scale);
 					pos += m_offset;
-					glVertex3d(pos.x, pos.y, pos.z);
+					glVertex3f(pos.x, pos.y, pos.z);
 
 					Vector3 dir = m_underwater.getSurfaceNormal(x, z);
 					dir = dir.getComponentRatioSafe(m_scale);
 					dir.normalize();
 					Vector3 end = pos + dir * 0.5;
-					glVertex3d(end.x, end.y, end.z);
+					glVertex3f(end.x, end.y, end.z);
 				}
 		glEnd();
-	m_surface_normals_list.end();
+	});
 }
 
 bool Terrain :: isInvariantTrue () const

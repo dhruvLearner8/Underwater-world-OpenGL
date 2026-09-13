@@ -22,6 +22,8 @@
 #ifndef OBJ_LIBRARY_DISPLAY_LIST_H
 #define OBJ_LIBRARY_DISPLAY_LIST_H
 
+#include <functional>
+
 
 
 namespace ObjLibrary
@@ -292,39 +294,28 @@ public:
 	void makeEmpty ();
 
 //
-//  begin
+//  record
 //
-//  Purpose: To begin specifying this DisplayList.
-//  Parameter(s): N/A
-//  Precondition(s):
-//    <1> isGlutInitialized()
-//    <2> !isDisabledForExit()
-//    <3> !isPartial()
+//  Purpose: To specify this DisplayList by recording a function
+//           that issues the desired OpenGL drawing commands.
+//  Parameter(s):
+//    <1> draw_function: A function that issues OpenGL commands
+//  Precondition(s): N/A
 //  Returns: N/A
-//  Side Effect: Specification of this DisplayList is started.
-//               (Almost) all OpenGL commands will be stored in
-//               this DisplayList until end() is called.  For
-//               the complete specification of which commands
-//               are stored in the DisplayList and which are
-//               always executed immediately, refer to the
-//               OpenGL offical documentaion.
+//  Side Effect: This DisplayList is set to invoke draw_function
+//               every time draw() is called.
 //
-	void begin ();
-
+//  Note: This replaces the older begin()/end() pair, which relied
+//        on real OpenGL display lists (glNewList/glEndList).  That
+//        compatibility-profile feature has no WebGL equivalent, so
+//        it is not available when this project is compiled with
+//        Emscripten.  Storing and replaying a draw_function instead
+//        works identically on every platform, at the cost of
+//        re-issuing the underlying OpenGL calls every frame rather
+//        than replaying a single pre-compiled GPU-side list.  For
+//        this project's scene complexity, that cost is negligible.
 //
-//  end
-//
-//  Purpose: To end specifying this DisplayList.
-//  Parameter(s): N/A
-//  Precondition(s):
-//    <1> isGlutInitialized()
-//    <2> !isDisabledForExit()
-//    <3> !isPartial()
-//  Returns: N/A
-//  Side Effect: Specification of this DisplayList is marked as
-//               completed.
-//
-	void end ();
+	void record (std::function<void()> draw_function);
 
 private:
 //
@@ -357,7 +348,7 @@ private:
 	//
 	struct InnerData
 	{
-		unsigned int m_list_id;
+		std::function<void()> m_draw_function;
 		unsigned int m_usages;
 	};
 

@@ -121,7 +121,7 @@ void DisplayList :: draw () const
 	assert(!isDisabledForExit());
 	assert(isReady());
 
-	glCallList(mp_data->m_list_id);
+	mp_data->m_draw_function();
 }
 
 
@@ -131,17 +131,17 @@ void DisplayList :: makeEmpty ()
 	switch(getState())
 	{
 	case PARTIAL:
-		end();
+		// Only reachable via a stale InnerData with m_usages == 0,
+		//   which record() never leaves behind - present only for
+		//   getState()'s benefit.
+		delete mp_data;
+		mp_data = NULL;
 		break;
 	case READY:
 		assert(mp_data->m_usages > 0);
 		mp_data->m_usages--;
 		if(mp_data->m_usages == 0)
-		{
-			if(!isDisabledForExit())
-				glDeleteLists(mp_data->m_list_id, 1);
 			delete mp_data;
-		}
 		mp_data = NULL;
 		break;
 	}
@@ -149,7 +149,7 @@ void DisplayList :: makeEmpty ()
 	assert(isEmpty());
 }
 
-void DisplayList :: begin ()
+void DisplayList :: record (std::function<void()> draw_function)
 {
 	assert(isGlutInitialized());
 	assert(!isDisabledForExit());
@@ -161,23 +161,7 @@ void DisplayList :: begin ()
 	assert(isEmpty());
 
 	mp_data = new InnerData();
-	mp_data->m_usages = 0;
-	mp_data->m_list_id = glGenLists(1);
-
-	glNewList(mp_data->m_list_id, GL_COMPILE);
-
-	assert(getState() == PARTIAL);
-}
-
-void DisplayList :: end ()
-{
-	assert(isGlutInitialized());
-	assert(!isDisabledForExit());
-	assert(isPartial());
-
-	glEndList();
-
-	assert(mp_data->m_usages == 0);
+	mp_data->m_draw_function = draw_function;
 	mp_data->m_usages = 1;
 
 	assert(isReady());

@@ -1123,7 +1123,7 @@ void ObjModel :: drawVertices (double red, double green, double blue) const
 
 	glBegin(GL_POINTS);
 		for(unsigned int v = 0; v < getVertexCount(); v++)
-			glVertex3dv(mv_vertexes[v].getAsArray());
+			glVertex3f(mv_vertexes[v].x, mv_vertexes[v].y, mv_vertexes[v].z);
 	glEnd();
 
 	material.deactivate();
@@ -1185,7 +1185,7 @@ void ObjModel :: drawWireframe (double red, double green, double blue) const
 				for(unsigned int v = 0; v < getFaceVertexCount(m, f); v++)
 				{
 					unsigned int vertex = mv_meshes[m].mv_faces[f].mv_vertexes[v].m_vertex;
-					glVertex3dv(mv_vertexes[vertex].getAsArray());
+					glVertex3f(mv_vertexes[vertex].x, mv_vertexes[vertex].y, mv_vertexes[vertex].z);
 				}
 			glEnd();
 		}
@@ -1308,8 +1308,8 @@ void ObjModel :: drawVertexNormals (double length, double red, double green, dou
 
 						Vector3 normal_end = mv_vertexes[vertex] + mv_normals[normal] * length;
 
-						glVertex3dv(mv_vertexes[vertex].getAsArray());
-						glVertex3dv(normal_end.getAsArray());
+						glVertex3f(mv_vertexes[vertex].x, mv_vertexes[vertex].y, mv_vertexes[vertex].z);
+						glVertex3f(normal_end.x, normal_end.y, normal_end.z);
 					}
 				}
 	glEnd();
@@ -1394,8 +1394,8 @@ void ObjModel :: drawFaceNormals (double length, double red, double green, doubl
 
 					Vector3 normal_end = center + face_normal;
 
-					glVertex3dv(center.getAsArray());
-					glVertex3dv(normal_end.getAsArray());
+					glVertex3f(center.x, center.y, center.z);
+					glVertex3f(normal_end.x, normal_end.y, normal_end.z);
 				}
 			}
 	glEnd();
@@ -1429,9 +1429,10 @@ DisplayList ObjModel :: getDisplayList () const
 			mv_meshes[i].mp_material->loadDisplayTextures();
 
 	DisplayList list;
-	list.begin();
-		draw();
-	list.end();
+	list.record([model = *this]()
+	{
+		model.draw();
+	});
 
 	assert(!Material::isMaterialActive());
 	return list;
@@ -1447,9 +1448,10 @@ DisplayList ObjModel :: getDisplayListMaterial (const Material& material) const
 	assert(!Material::isMaterialActive());
 
 	DisplayList list;
-	list.begin();
-		drawMaterial(material);
-	list.end();
+	list.record([model = *this, material]()
+	{
+		model.drawMaterial(material);
+	});
 
 	assert(!Material::isMaterialActive());
 	return list;
@@ -1525,9 +1527,14 @@ DisplayList ObjModel :: getDisplayListMaterialNone () const
 
 	DisplayList list;
 
-	list.begin();
-		drawMaterialNone();
-	list.end();
+	// Capture a copy of *this (not just [=], which would only copy a
+	//   pointer to it): getDisplayList() is normally called on a
+	//   temporary ObjModel (e.g. ObjModel(path).getDisplayList()),
+	//   which is destroyed before this recorded function ever runs.
+	list.record([model = *this]()
+	{
+		model.drawMaterialNone();
+	});
 
 	return list;
 }
@@ -3083,7 +3090,7 @@ void ObjModel :: drawPointSets (unsigned int mesh) const
 				{
 					unsigned int vertex = mv_meshes[mesh].mv_point_sets[p].mv_vertexes[v];
 
-					glVertex3dv(mv_vertexes[vertex].getAsArray());
+					glVertex3f(mv_vertexes[vertex].x, mv_vertexes[vertex].y, mv_vertexes[vertex].z);
 				}
 		glEnd();
 	}
@@ -3105,11 +3112,11 @@ void ObjModel :: drawPolylines (unsigned int mesh) const
 				if(texture_coordinates != NO_TEXTURE_COORDINATES)
 				{
 					// flip texture coordinates to match Maya <|>
-					glTexCoord2d(      mv_texture_coordinates[texture_coordinates].x,
+					glTexCoord2f(      mv_texture_coordinates[texture_coordinates].x,
 					             1.0 - mv_texture_coordinates[texture_coordinates].y);
 				}
 
-				glVertex3dv(mv_vertexes[vertex].getAsArray());
+				glVertex3f(mv_vertexes[vertex].x, mv_vertexes[vertex].y, mv_vertexes[vertex].z);
 			}
 		glEnd();
 	}
@@ -3139,16 +3146,16 @@ void ObjModel :: drawFaces (unsigned int mesh) const
 			unsigned int normal              = mv_meshes[mesh].mv_faces[f].mv_vertexes[v].m_normal;
 
 			if(normal != NO_NORMAL)
-				glNormal3dv(mv_normals[normal].getAsArray());
+				glNormal3f(mv_normals[normal].x, mv_normals[normal].y, mv_normals[normal].z);
 
 			if(texture_coordinates != NO_TEXTURE_COORDINATES)
 			{
 				// flip texture coordinates to match Maya <|>
-				glTexCoord2d(      mv_texture_coordinates[texture_coordinates].x,
+				glTexCoord2f(      mv_texture_coordinates[texture_coordinates].x,
 				             1.0 - mv_texture_coordinates[texture_coordinates].y);
 			}
 
-			glVertex3dv(mv_vertexes[vertex].getAsArray());
+			glVertex3f(mv_vertexes[vertex].x, mv_vertexes[vertex].y, mv_vertexes[vertex].z);
 		}
 
 		// end of current trinagle fan

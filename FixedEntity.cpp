@@ -193,19 +193,20 @@ void FixedEntity :: drawSurfaceNormals () const
 	
 void FixedEntity :: initSurfaceNormalsList ()
 {
-	m_surface_normals_list.begin();
-	glColor3d(1.0, 1.0, 0.0);  // yellow
+	m_surface_normals_list.record([=]()
+	{
+		glColor3f(1.0f, 1.0f, 0.0f);  // yellow
 		glBegin(GL_LINES);
 			for(unsigned int i = 0; i < 100; i++)
 			{
 				Vector3 query_pos = getRandomSurfacePoint();
 				Vector3 normal    = getSurfaceNormal(query_pos);
 				Vector3 end_at    = query_pos + normal * NORMAL_LENGTH;
-				glVertex3d(query_pos.x, query_pos.y, query_pos.z);
-				glVertex3d(   end_at.x,    end_at.y,    end_at.z);
+				glVertex3f(query_pos.x, query_pos.y, query_pos.z);
+				glVertex3f(   end_at.x,    end_at.y,    end_at.z);
 			}
 		glEnd();
-	m_surface_normals_list.end();
+	});
 }
 
 ObjLibrary::Vector3 FixedEntity :: getRandomSurfacePoint () const

@@ -171,7 +171,16 @@ bool Material :: isMaterialActive ()
 void Material :: deactivate ()
 {
 	if(g_is_material_active)
-		glPopAttrib();
+	{
+		// Explicit restore instead of glPopAttrib() - see WebGLCompat.cpp.
+		// Covers everything toggled by both activate() and
+		//   activateSeperateSpecular(): alpha test, blend, texture,
+		//   and depth func (activateSeperateSpecular sets GL_EQUAL).
+		glDisable(GL_ALPHA_TEST);
+		glDisable(GL_BLEND);
+		glDisable(GL_TEXTURE_2D);
+		glDepthFunc(GL_LESS);
+	}
 
 	g_is_material_active = false;
 
