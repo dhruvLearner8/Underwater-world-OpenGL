@@ -340,14 +340,12 @@ void FishSchool::drawLine()
 	glPushMatrix();
 	glTranslated(leaderPosition.x, leaderPosition.y, leaderPosition.z);
 	drawWireSphere(0.1, 10, 10);
-	glEnd();
 	glPopMatrix();
 
 	glColor3d(1.0, 0.0, 1.0);
 	glPushMatrix();
 	glTranslated(current_explore_target.x, current_explore_target.y, current_explore_target.z);
 	drawWireSphere(0.1, 10, 10);
-	glEnd();
 	glPopMatrix();
 
 }

@@ -8,7 +8,20 @@
 
 
 
-#ifdef _WIN32
+#ifdef __EMSCRIPTEN__
+
+	// nanosleep() has no real OS thread to yield on Emscripten's default
+	//   single-threaded target - it compiles to a busy-wait that blocks
+	//   the browser's main thread (and therefore rendering) for the full
+	//   duration.  requestAnimationFrame already paces glutIdleFunc at
+	//   the display's refresh rate, so there is nothing useful to sleep
+	//   for here.
+	void sleep (double seconds)
+	{
+		assert(seconds >= 0.0);
+	}
+
+#elif defined(_WIN32)
 
 	#include <windows.h>  // needed for Sleep(millisec)
 
